@@ -108,4 +108,4 @@ And this is a more explicit check that `keyDown()` was called with the
 
 ### License
 
-MIT (c) Anthony Trinh
+[MIT](https://opensource.org/licenses/MIT) &copy; Anthony Trinh
