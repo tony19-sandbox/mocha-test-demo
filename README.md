@@ -62,7 +62,7 @@ export const mapDispatchToProps = dispatch => ({
 });
 ```
 
-<sup>[StackOverflow ref(http://stackoverflow.com/q/41633297/6277151)</sup>
+<sup>http://stackoverflow.com/q/41633297/6277151</sup>
 
 ### Answer
 
