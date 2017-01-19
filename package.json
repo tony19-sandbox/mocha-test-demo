@@ -4,7 +4,8 @@
   "description": "Mocha demo",
   "main": "test.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register test*.js"
+    "test": "mocha --compilers js:babel-core/register",
+    "test-cov": "./node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha --report html --check-coverage"
   },
   "repository": {
     "type": "git",
@@ -17,12 +18,17 @@
   },
   "homepage": "https://github.com/tony19-sandbox/mocha-test-demo#readme",
   "dependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
+    "babel-istanbul": "^0.12.1",
     "babel-preset-es2015": "^6.18.0",
     "chai": "^3.5.0",
     "keycodes": "^0.2.4",
     "mocha": "^3.2.0",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2"
   }
 }

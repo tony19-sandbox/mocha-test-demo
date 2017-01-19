@@ -2,8 +2,8 @@ import keycode from "keycodes";
 import { spy, stub } from "sinon";
 import chai from "chai";
 import sinonChai from "sinon-chai";
-import * as actions from "./actions";
-import { mapDispatchToProps } from "./connected-component";
+import * as actions from "../actions";
+import { mapDispatchToProps } from "../connected-component";
 
 chai.use(sinonChai);
 const expect = chai.expect;
