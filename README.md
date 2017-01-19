@@ -86,7 +86,7 @@ a `dummy` value whenever it gets called with `keyCode`:
         keyDown.withArgs(keyCode).returns(dummy);
     });
 
-After our test are done, we need to undo the stub in case other test
+After our tests are done, we need to undo the stub in case other test
 suites need to use it.
 
     after(() => {
@@ -100,8 +100,8 @@ was called.
 
     expect(dispatch).to.have.been.calledWith(dummy);
 
-Finally, we check that `keyDown()` was called with the `keyCode` as its
-only argument:
+And this is a more explicit check that `keyDown()` was called with the
+`keyCode` as its only argument:
 
     expect(keyDown).to.have.been.calledWithExactly(keyCode);
 
