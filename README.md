@@ -7,11 +7,38 @@
 Run these commands:
 
     yarn
-    yarn test
+    yarn test-cov
 
 Observe this output:
 
-INSERT IMAGE
+```shell
+  Dispatcher v1
+    ✓ Dispatches a keyDown event with the specified keyCode if the selected element is not an <input>
+
+  Dispatcher v2
+    with non-<input>
+      ✓ dispatches key
+      ✓ calls keyDown with only keyCode as argument
+    with <input>
+      ✓ does not dispatch key
+      ✓ does not call keyDown
+
+
+  5 passing (28ms)
+
+=============================================================================
+Writing coverage object [/Users/tony/src/tmp/mocha-test-demo/coverage/coverage.json]
+Writing coverage reports at [/Users/tony/src/tmp/mocha-test-demo/coverage]
+=============================================================================
+
+=============================== Coverage summary ===============================
+Statements   : 61.54% ( 8/13 )
+Branches     : 75% ( 3/4 )
+Functions    : 50% ( 2/4 )
+Lines        : 60% ( 6/10 )
+================================================================================
+✨  Done in 1.89s.
+```
 
 ### Question
 
