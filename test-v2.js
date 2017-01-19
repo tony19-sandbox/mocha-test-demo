@@ -17,43 +17,12 @@ const createEvent = (tag, keyCode) => ({
     keyCode
 });
 
-describe("Dispatcher", () => {
-    const keyCode = keycode("u");
-    const myStub = stub();
-    let keyDown;
-
-    before(() => {
-        // Stub actions.keyDown() so that we can observe whether it gets
-        // called and with what arguments; and so that we can control its
-        // return value. In this case, if `keyDown()` gets called with
-        // the `keyCode` above, we return `myStub`. Otherwise, we return
-        // undefined.
-        keyDown = stub(actions, "keyDown");
-        keyDown.withArgs(keyCode).returns(myStub);
-    });
-
-    after(() => {
-        // Undo the stub on actions.keyDown() so that other suites
-        // could use it if needed.
-        keyDown.restore();
-    });
-
-    it("Dispatches a keyDown event with the specified keyCode if the selected element is not an <input>", () => {
-        const dispatch = spy();
-
-        mapDispatchToProps(dispatch).onKeyDown(createEvent("div", keyCode));
-
-        // If `dispatch()` is called with `myStub`, `keyDown()` must
-        // have been invoked.
-        expect(dispatch).to.have.been.calledWith(myStub);
-
-        // Now verify that `keyDown()` was called with only `keyCode`
-        // as an argument.
-        expect(keyDown).to.have.been.calledWithExactly(keyCode);
-    });
-});
-
-describe("Dispatcher", () => {
+/**
+ * This suite is slightly more granular than the v1 suite, which
+ * helps with readability of the test output and allows for
+ * unrelated tests to run independently.
+ */
+describe("Dispatcher v2", () => {
     const dispatch = spy();
     const keyCode = keycode("u");
     const myStub = stub();

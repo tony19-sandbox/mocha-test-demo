@@ -4,7 +4,7 @@
   "description": "Mocha demo",
   "main": "test.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register test.js"
+    "test": "mocha --compilers js:babel-core/register test*.js"
   },
   "repository": {
     "type": "git",
