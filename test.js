@@ -10,109 +10,109 @@ const expect = chai.expect;
 
 // Creates a simple Event stub...
 const createEvent = (tag, keyCode) => ({
-  target: {
-    tagName: tag.toUpperCase()
-  },
-  preventDefault: spy(),
-  keyCode
+    target: {
+        tagName: tag.toUpperCase()
+    },
+    preventDefault: spy(),
+    keyCode
 });
 
 describe("Dispatcher", () => {
-  const keyCode = keycode("u");
-  const myStub = stub();
-  let keyDown;
+    const keyCode = keycode("u");
+    const myStub = stub();
+    let keyDown;
 
-  before(() => {
-    // Stub actions.keyDown() so that we can observe whether it gets
-    // called and with what arguments; and so that we can control its
-    // return value. In this case, if `keyDown()` gets called with
-    // the `keyCode` above, we return `myStub`. Otherwise, we return
-    // undefined.
-    keyDown = stub(actions, "keyDown");
-    keyDown.withArgs(keyCode).returns(myStub);
-  });
+    before(() => {
+        // Stub actions.keyDown() so that we can observe whether it gets
+        // called and with what arguments; and so that we can control its
+        // return value. In this case, if `keyDown()` gets called with
+        // the `keyCode` above, we return `myStub`. Otherwise, we return
+        // undefined.
+        keyDown = stub(actions, "keyDown");
+        keyDown.withArgs(keyCode).returns(myStub);
+    });
 
-  after(() => {
-    // Undo the stub on actions.keyDown() so that other suites
-    // could use it if needed.
-    keyDown.restore();
-  });
+    after(() => {
+        // Undo the stub on actions.keyDown() so that other suites
+        // could use it if needed.
+        keyDown.restore();
+    });
 
-  it("Dispatches a keyDown event with the specified keyCode if the selected element is not an <input>", () => {
+    it("Dispatches a keyDown event with the specified keyCode if the selected element is not an <input>", () => {
+        const dispatch = spy();
+
+        mapDispatchToProps(dispatch).onKeyDown(createEvent("div", keyCode));
+
+        // If `dispatch()` is called with `myStub`, `keyDown()` must
+        // have been invoked.
+        expect(dispatch).to.have.been.calledWith(myStub);
+
+        // Now verify that `keyDown()` was called with only `keyCode`
+        // as an argument.
+        expect(keyDown).to.have.been.calledWithExactly(keyCode);
+    });
+});
+
+describe("Dispatcher", () => {
     const dispatch = spy();
+    const keyCode = keycode("u");
+    const myStub = stub();
+    let keyDown;
 
-    mapDispatchToProps(dispatch).onKeyDown(createEvent("div", keyCode));
+    function reset() {
+        dispatch.reset();
+        keyDown.reset();
+        myStub.reset();
+    }
 
-    // If `dispatch()` is called with `myStub`, `keyDown()` must
-    // have been invoked.
-    expect(dispatch).to.have.been.calledWith(myStub);
-
-    // Now verify that `keyDown()` was called with only `keyCode`
-    // as an argument.
-    expect(keyDown).to.have.been.calledWithExactly(keyCode);
-  });
-});
-
-describe("Dispatcher", () => {
-  const dispatch = spy();
-  const keyCode = keycode("u");
-  const myStub = stub();
-  let keyDown;
-
-  function reset() {
-    dispatch.reset();
-    keyDown.reset();
-    myStub.reset();
-  }
-
-  before(() => {
-    // Stub actions.keyDown() so that we can observe whether it gets
-    // called and with what arguments; and so that we can control its
-    // return value. In this case, if `keyDown()` gets called with
-    // the `keyCode` above, we return `myStub`. Otherwise, we return
-    // undefined.
-    keyDown = stub(actions, "keyDown");
-    keyDown.withArgs(keyCode).returns(myStub);
-  });
-
-  after(() => {
-    // Undo the stub on actions.keyDown() so that other suites
-    // could use it if needed.
-    keyDown.restore();
-  });
-
-  describe("with non-<input>", () => {
     before(() => {
-      mapDispatchToProps(dispatch).onKeyDown(createEvent("div", keyCode));
+        // Stub actions.keyDown() so that we can observe whether it gets
+        // called and with what arguments; and so that we can control its
+        // return value. In this case, if `keyDown()` gets called with
+        // the `keyCode` above, we return `myStub`. Otherwise, we return
+        // undefined.
+        keyDown = stub(actions, "keyDown");
+        keyDown.withArgs(keyCode).returns(myStub);
     });
 
-    after(reset);
-
-    it("dispatches key", () => {
-      // If `dispatch()` is called with `myStub`, `keyDown()` must
-      // have been invoked because `myStub` can only be returned
-      // by our `keyDown()`.
-      expect(dispatch).to.have.been.calledWith(myStub);
+    after(() => {
+        // Undo the stub on actions.keyDown() so that other suites
+        // could use it if needed.
+        keyDown.restore();
     });
 
-    it("calls keyDown with only keyCode as argument", () => {
-      expect(keyDown).to.have.been.calledWithExactly(keyCode);
-    })
-  });
+    describe("with non-<input>", () => {
+        before(() => {
+            mapDispatchToProps(dispatch).onKeyDown(createEvent("div", keyCode));
+        });
 
-  describe("with <input>", () => {
-    before(() => {
-      mapDispatchToProps(dispatch).onKeyDown(createEvent("input", keyCode));
+        after(reset);
+
+        it("dispatches key", () => {
+            // If `dispatch()` is called with `myStub`, `keyDown()` must
+            // have been invoked because `myStub` can only be returned
+            // by our `keyDown()`.
+            expect(dispatch).to.have.been.calledWith(myStub);
+        });
+
+        it("calls keyDown with only keyCode as argument", () => {
+            expect(keyDown).to.have.been.calledWithExactly(keyCode);
+        })
     });
 
-    after(reset);
+    describe("with <input>", () => {
+        before(() => {
+            mapDispatchToProps(dispatch).onKeyDown(createEvent("input", keyCode));
+        });
 
-    it("does not dispatch key", () => {
-      expect(dispatch).to.not.have.been.called;
-    });
+        after(reset);
 
-    it("does not call keyDown", () => {
-      expect(keyDown).to.not.have.been.called;
+        it("does not dispatch key", () => {
+            expect(dispatch).to.not.have.been.called;
+        });
+
+        it("does not call keyDown", () => {
+            expect(keyDown).to.not.have.been.called;
+        });
     });
-  });
 });
