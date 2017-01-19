@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tony19-sandbox/mocha-test-demo.git"
+    "url": "git+https://github.com/tony19/mocha-test-demo.git"
   },
   "author": "Tony Trinh <tony19@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tony19-sandbox/mocha-test-demo/issues"
+    "url": "https://github.com/tony19/mocha-test-demo/issues"
   },
-  "homepage": "https://github.com/tony19-sandbox/mocha-test-demo#readme",
+  "homepage": "https://github.com/tony19/mocha-test-demo#readme",
   "dependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
