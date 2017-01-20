@@ -1,5 +1,5 @@
 import keycode from "keycodes";
-import { spy, stub } from "sinon";
+import { stub } from "sinon";
 import chai from "chai";
 import sinonChai from "sinon-chai";
 import * as actions from "../actions";
