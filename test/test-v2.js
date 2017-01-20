@@ -23,7 +23,7 @@ const createEvent = (tag, keyCode) => ({
  * unrelated tests to run independently.
  */
 describe("Dispatcher v2", () => {
-    const dispatch = spy();
+    const dispatch = stub();
     const keyCode = keycode("u");
     const myStub = stub();
     let keyDown;
@@ -82,6 +82,22 @@ describe("Dispatcher v2", () => {
 
         it("does not call keyDown", () => {
             expect(keyDown).to.not.have.been.called;
+        });
+    });
+
+    describe("event.preventDefault", () => {
+        it("called when dispatch returns true", () => {
+            dispatch.returns(true);
+            const event = createEvent("div", keyCode);
+            mapDispatchToProps(dispatch).onKeyDown(event);
+            expect(event.preventDefault).to.have.been.called;
+        });
+
+        it("does not call preventDefault when dispatch returns false", () => {
+            dispatch.returns(false);
+            const event = createEvent("div", keyCode);
+            mapDispatchToProps(dispatch).onKeyDown(event);
+            expect(event.preventDefault).to.not.have.been.called;
         });
     });
 });
