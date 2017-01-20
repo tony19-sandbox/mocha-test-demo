@@ -12,6 +12,11 @@ Run these commands:
 Observe this output:
 
 ```shell
+  keyDown
+    ✓ returns a function
+    ✓ that function returns expected boolean
+    ✓ that function calls given dispatch
+
   Dispatcher v1
     ✓ Dispatches a keyDown event with the specified keyCode if the selected element is not an <input>
 
@@ -22,9 +27,12 @@ Observe this output:
     with <input>
       ✓ does not dispatch key
       ✓ does not call keyDown
+    event.preventDefault
+      ✓ called when dispatch returns true
+      ✓ does not call preventDefault when dispatch returns false
 
 
-  5 passing (28ms)
+  10 passing (48ms)
 
 =============================================================================
 Writing coverage object [/Users/tony/src/tmp/mocha-test-demo/coverage/coverage.json]
@@ -32,10 +40,10 @@ Writing coverage reports at [/Users/tony/src/tmp/mocha-test-demo/coverage]
 =============================================================================
 
 =============================== Coverage summary ===============================
-Statements   : 61.54% ( 8/13 )
-Branches     : 75% ( 3/4 )
-Functions    : 50% ( 2/4 )
-Lines        : 60% ( 6/10 )
+Statements   : 100% ( 16/16 )
+Branches     : 100% ( 4/4 )
+Functions    : 100% ( 5/5 )
+Lines        : 100% ( 12/12 )
 ================================================================================
 ✨  Done in 1.89s.
 ```
